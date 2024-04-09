@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            text-align: center;
+            background-image: url(./bg.jpeg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .form-box {
+            background-color: #222;
+            opacity: 0.9;
+            padding: 50px 80px;
+            border-radius: 10px;
+            z-index: 10;
+            color: white;
+            position: relative;
+        }
+
+        .form-title {
+            color: white;
+            padding: 10px 0;
+            text-decoration: underline;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            color: white;
+        }
+
+        input {
+            padding: 15px 30px;
+            margin-bottom: 10px;
+            border: 1px solid #777;
+            border-radius: 5px;
+            font-size: 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        input::placeholder {
+            color: #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 40px;
+            cursor: pointer;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-weight: 900;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="overlay"></div>
+        <div class="form-box">
+            <h1 class="form-title">Login Form</h1>
+            <form method="GET" action="LoginSubmit">
+                <input type="email" name="email" id="Email" placeholder="Email">
+                <input type="password" name="password" id="password" placeholder="Password">
+                <div class="error-message" id="error-message"></div>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+</body>
+
+<script>
+    const errorMessageDiv = document.getElementById("error-message");
+
+    function displayErrorMessage(message) {
+        errorMessageDiv.textContent = message;
+    }
+
+    const loginForm = document.querySelector("form");
+
+    loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(loginForm);
+
+        try {
+            const response = await fetch("/LoginSubmit?" + new URLSearchParams(formData).toString());
+            const data = await response.json();
+
+            if (data.error) {
+                displayErrorMessage(data.error);
+            } else if (data.message) {
+                window.location.href = "/file.html";
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    });
+</script>
+
+</html>

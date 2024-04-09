@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <style>
+        #home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            text-align: center;
+            background-image: url(./bg.jpeg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding-top: 100px;
+        }
+
+        .overlay {
+            position: relative;
+        }
+
+        .overlay::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: none;
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            padding: 5px 100px;
+            color: white;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <main >
+
+    </main>
+
+
+    <script src="script.js" type="module"></script>
+</body>
+
+</html>
